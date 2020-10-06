@@ -1,9 +1,11 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
+import {header} from '../../assets';
 
 const MyReview = () => {
   return (
     <View style={styles.container}>
+      <Image source={header} style={styles.header} />
       <View />
     </View>
   );
@@ -14,7 +16,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'black',
-    paddingHorizontal: 7,
+    paddingTop: 10,
+  },
+  header: {
+    height: 50,
+    width: 120,
+    marginBottom: 10,
+    alignSelf: 'center',
   },
 });
 
