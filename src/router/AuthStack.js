@@ -12,6 +12,8 @@ import {
   MovieByGenreScreen,
   DetailMovieScreen,
   SearchScreen,
+  AllReviewScreen, 
+  // MyReviewScreen
 } from '../screen';
 import MyTabs from '../router/MyTabs';
 
@@ -84,6 +86,24 @@ export default AuthStack = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="All Review"
+          component={AllReviewScreen}
+          options={{
+            title: 'All Review',
+            headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: '#fff',
+          }}
+        />
+        {/* <Stack.Screen
+          name="My Review"
+          component={MyReviewScreen}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

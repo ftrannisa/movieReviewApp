@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, Share} from 'react-native';
 import {Button, Card, Image} from 'react-native-elements';
 import {
   ScrollView,
@@ -15,7 +15,6 @@ import { colors } from '../../utils/color';
 const MovieByGenre = (props) => {
   console.log("aa", props)
   const [data, setData] = useState([]);
-  const [genre_ids, setGenreID] = useState('');
   const [genre, setGenre] = useState('');
   const navigation = useNavigation();
 
@@ -39,13 +38,6 @@ const MovieByGenre = (props) => {
     }
   };
 
-  // const detail = id => {
-  //   navigation.navigate('Details Screen');
-  // };
-
-  // const comment = id => {
-  //   navigation.navigate('All Review');
-  // };
 
   const renderItem = ({item, index}) => (
     console.log("render item movie by", item),
@@ -97,6 +89,10 @@ const MovieByGenre = (props) => {
             <Ionicons name="share-social-outline"color="#040303" size={20}  />
         }  
         type="clear"
+        onPress={() =>
+          navigation.navigate('Details Screen', {
+            id: item.id,
+          })}
         />
       </View>
     </Card>

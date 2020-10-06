@@ -95,7 +95,10 @@ console.log("route adalah", route)
               name="share-variant"
               type="material-community"
               color="#040303"
-              onPress={() => detail(item.id)}
+              onPress={() =>
+                navigation.navigate('Details Screen', {
+                  id: item.id,
+                })}
             />
           }
           type="clear"

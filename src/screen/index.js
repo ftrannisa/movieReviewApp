@@ -9,8 +9,8 @@ import AllGenreScreen from './AllGenreScreen/AllGenreScreen';
 import MovieByGenreScreen from './MovieByGenreScreen/MovieByGenreScreen';
 import DetailMovieScreen from './DetailMovieScreen/DetailMovieScreen';
 import SearchScreen from './SearchScreen/SearchScreen';
+import AllReviewScreen from './AllReviewScreen/AllReviewScreen';
 // import ChangeImage from './ProfileScreen/ImagePicker';
-// import EditPassword from './ProfileScreen/EditPassword';
 
 export {
   SplashScreen,
@@ -24,6 +24,6 @@ export {
   MovieByGenreScreen,
   DetailMovieScreen,
   SearchScreen,
+  AllReviewScreen,
   // ChangeImage,
-  // EditPassword,
 };

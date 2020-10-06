@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native-gesture-handler';
-// import {useSelector, useDispatch} from 'react-redux';
 import Axios from 'axios';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
@@ -60,9 +59,9 @@ const CardItemDetail = (props) => {
       );
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          console.log('Shared Activity');
+          console.log('Shared activity');
         } else {
-          console.log('Link Copied');
+          console.log('Link copied');
         }
       } else if (result.action === Share.dismissedAction) {
         console.log('Share canceled');
@@ -70,10 +69,6 @@ const CardItemDetail = (props) => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const allComment = id => {
-    navigation.navigate('All Review');
   };
 
   console.log("data", data)
@@ -132,7 +127,10 @@ const CardItemDetail = (props) => {
                       color="#979797"
                     />
                   }
-                  onPress={() => comment(data.id)}
+                  // onPress={() =>
+                  //   navigation.navigate('All Review', {
+                  //     id: data.id,
+                  //   })}
                   type="clear"
                   buttonStyle={styles.buttonRating}
                   containerStyle={styles.buttonRatingContainer}
@@ -157,7 +155,10 @@ const CardItemDetail = (props) => {
               title={data.vote_count}
               type="clear"
               titleStyle={styles.titleButton}
-              onPress={() => allComment(data.id)}
+              onPress={() =>
+                  navigation.navigate('All Review', {
+                    id: data.id,
+                  })}
             />
             <Button
               icon={

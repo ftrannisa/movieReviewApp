@@ -175,12 +175,6 @@ const Profile = () => {
         <Button
           buttonStyle={styles.button}
           titleStyle={styles.buttonTitle}
-          title="Edit Password"
-          onPress={() => navigation.navigate('Edit Password')}
-        />
-        <Button
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
           title="Logout"
           onPress={handleLogout}
         />
