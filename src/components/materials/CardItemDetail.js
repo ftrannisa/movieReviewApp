@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Share} from 'react-native';
+import {View, Text, StyleSheet, Share, TouchableOpacity} from 'react-native';
 import {Card, Button, Icon, Image} from 'react-native-elements';
 import {
   TouchableWithoutFeedback,
@@ -92,6 +92,10 @@ const CardItemDetail = (props) => {
               }
               type="clear"
               containerStyle={styles.imageButton}
+              // onPress={() =>
+              //   navigation.navigate('Youtube Player', {
+              //     video: video, 
+              //   })}
             />
           </View>
           <View style={styles.titleDetailContainer}>
@@ -112,7 +116,7 @@ const CardItemDetail = (props) => {
                     type="material-community"
                     name="star"
                     size={20}
-                    color="rgba(255, 194, 0, 0.98)"
+                    color="#FED000"
                     containerStyle={styles.ratingIcon}
                   />
                   <Text style={styles.ratingText}>{data.vote_average}/10</Text>

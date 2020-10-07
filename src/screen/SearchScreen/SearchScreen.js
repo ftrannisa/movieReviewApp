@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native-gesture-handler';
+import { colors } from '../../utils/color';
 
 const SearchScreen = ({route, navigation}) => {
 console.log("route adalah", route)
@@ -55,7 +56,7 @@ console.log("route adalah", route)
               type="material-community"
               name="play-circle-outline"
               size={40}
-              color="#FEA800"
+              color={colors.default}
             />
           }
           type="clear"
