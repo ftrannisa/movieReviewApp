@@ -9,15 +9,12 @@ import {
 import Axios from 'axios'
 import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
-// import AwesomeAlert from 'react-native-awesome-alerts';
-// import Alert from '../Alert';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import {colors} from '../../utils/color'
 
 const CardItemDetail = (props) => {
     console.log('isi props details', props)
     const [data, setData] = useState({})
-    //   const [alert, setAlert] = useState(false);
     const [genre, setGenre] = useState('')
     const navigation = useNavigation()
     const [id, setID] = useState('')
