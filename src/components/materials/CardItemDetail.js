@@ -93,7 +93,7 @@ const CardItemDetail = (props) => {
               type="clear"
               containerStyle={styles.imageButton}
               // onPress={() =>
-              //   navigation.navigate('Youtube Player', {
+              //   navigation.navigate('Video Player', {
               //     video: video, 
               //   })}
             />

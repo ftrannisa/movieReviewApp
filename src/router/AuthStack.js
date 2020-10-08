@@ -13,11 +13,9 @@ import {
   DetailMovieScreen,
   SearchScreen,
   AllReviewScreen,
-  // VideoPlayerScreen 
   // MyReviewScreen
 } from '../screen';
 import MyTabs from '../router/MyTabs';
-import VideoPlayerScreen from '../screen/VidepPlayerScreen/VideoPlayerScreen';
 
 const Stack = createStackNavigator();
 
@@ -99,17 +97,6 @@ export default AuthStack = () => {
           headerTintColor: '#fff',
           }}
         />
-         {/* <Stack.Screen
-          name="Video Player"
-          component={VideoPlayerScreen}
-          options={{
-            title: 'All Review',
-            headerStyle: {
-            backgroundColor: 'black',
-          },
-          headerTintColor: '#fff',
-          }}
-        /> */}
         {/* <Stack.Screen
           name="My Review"
           component={MyReviewScreen}
