@@ -4,6 +4,7 @@ import {Card, Button, Icon, Image} from 'react-native-elements'
 import {
     TouchableWithoutFeedback,
     ScrollView,
+    TouchableOpacity,
 } from 'react-native-gesture-handler'
 import Axios from 'axios'
 import moment from 'moment'
@@ -164,24 +165,24 @@ const CardItemDetail = (props) => {
                         </View>
                     </View>
                     <View style={styles.containerButton}>
-                        <Button
-                            icon={
-                                <Icon
-                                    name="comment-text-outline"
-                                    type="material-community"
-                                    color="#040303"
-                                    style={{marginRight: 10}}
-                                />
-                            }
-                            title={data.vote_count}
-                            type="clear"
-                            titleStyle={styles.titleButton}
+                        <TouchableOpacity
+                            style={styles.allReviewContainer}
                             onPress={() =>
                                 navigation.navigate('All Review', {
                                     id: data.id,
                                 })
-                            }
-                        />
+                            }>
+                            <Icon
+                                name="comment-text-outline"
+                                type="material-community"
+                                color="#040303"
+                                style={{marginRight: 10}}
+                            />
+
+                            <Text style={styles.titleButton}>
+                                {data.vote_count}
+                            </Text>
+                        </TouchableOpacity>
                         <Button
                             icon={
                                 <Icon
@@ -234,6 +235,11 @@ const styles = StyleSheet.create({
     imageContainer: {
         justifyContent: 'center',
         alignSelf: 'center',
+    },
+    allReviewContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
     },
     image: {
         width: 350,
