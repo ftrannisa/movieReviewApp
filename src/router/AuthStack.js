@@ -13,6 +13,7 @@ import {
   DetailMovieScreen,
   SearchScreen,
   AllReviewScreen,
+  YoutubeScreen,
   // MyReviewScreen
 } from '../screen';
 import MyTabs from '../router/MyTabs';
@@ -95,6 +96,13 @@ export default AuthStack = () => {
             backgroundColor: 'black',
           },
           headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="Video Player"
+          component={YoutubeScreen}
+          options={{
+            headerShown: false,
           }}
         />
         {/* <Stack.Screen

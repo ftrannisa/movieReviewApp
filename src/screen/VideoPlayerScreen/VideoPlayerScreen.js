@@ -1,16 +1,14 @@
-// import React from 'react';
-// import {WebView} from 'react-native-webview';
+import React from 'react'
+import { View, Text } from 'react-native'
+import VideoPlayer from "../../components/materials/VideoPlayer"
 
-// const VideoPlayerScreen = ({route}) => {
-//     const {video} = route.params;
-//     return (
-//     <WebView
-//       source={{
-//         uri:
-//           video,
-//       }}
-//     />
-//   );
-// }
+const VideoPlayerScreen = () => {
+    return (
+        <View>
+            <Text> Trailer</Text>
+            <VideoPlayer />
+        </View>
+    )
+}
 
-// export default VideoPlayerScreen;
+export default VideoPlayerScreen

@@ -11,6 +11,7 @@ import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import {colors} from '../../utils/color'
+import YouTube from 'react-native-youtube'
 
 const CardItemDetail = (props) => {
     console.log('isi props details', props)
@@ -97,10 +98,10 @@ const CardItemDetail = (props) => {
                             }
                             type="clear"
                             containerStyle={styles.imageButton}
-                            // onPress={() =>
-                            //   navigation.navigate('Video Player', {
-                            //     video: video,
-                            //   })}
+                            onPress={() =>
+                              navigation.navigate('Video Player', {
+                                id: data.id,
+                              })}
                         />
                     </View>
                     <View style={styles.titleDetailContainer}>

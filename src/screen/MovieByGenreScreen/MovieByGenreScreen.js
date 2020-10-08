@@ -13,7 +13,7 @@ import { colors } from '../../utils/color';
 
 
 const MovieByGenre = (props) => {
-  console.log("aa", props)
+  console.log("movie by genre", props)
   const [data, setData] = useState([]);
   const [genre, setGenre] = useState('');
   const navigation = useNavigation();

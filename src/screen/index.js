@@ -10,7 +10,7 @@ import MovieByGenreScreen from './MovieByGenreScreen/MovieByGenreScreen';
 import DetailMovieScreen from './DetailMovieScreen/DetailMovieScreen';
 import SearchScreen from './SearchScreen/SearchScreen';
 import AllReviewScreen from './AllReviewScreen/AllReviewScreen';
-// import VideoPlayerScreen from './VideoPlayerScreen/VideoPlayerScreen';
+import YoutubeScreen from './Youtube/YoutubeScreen';
 // import ChangeImage from './ProfileScreen/ImagePicker';
 
 export {
@@ -26,6 +26,6 @@ export {
   DetailMovieScreen,
   SearchScreen,
   AllReviewScreen,
-  // VideoPlayerScreen,
+  YoutubeScreen,
   // ChangeImage,
 };

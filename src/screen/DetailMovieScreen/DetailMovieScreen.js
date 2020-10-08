@@ -1,9 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
-// import {SearchBar, Icon} from 'react-native-elements';
 import CardItemDetail from '../../components/materials/CardItemDetail';
-// import AwesomeAlert from 'react-native-awesome-alerts';
-// import Alert from '../Alert';
 import {header} from '../../assets';
 
 
@@ -13,7 +10,6 @@ const DetailMovie = (props) => {
     <View style={styles.container}>
         <Image source={header} style={styles.header} />
         <CardItemDetail id={props.route.params.id} />
-      {/* <Alert />  */}
     </View>
   );
 };

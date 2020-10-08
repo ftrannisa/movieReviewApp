@@ -4,7 +4,6 @@ import {Avatar} from '../../assets';
 import {Image, Button, Icon} from 'react-native-elements';
 import {TextInput} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
 import Axios from 'axios';
 import {API_USER} from '../API';
 import ImagePicker from 'react-native-image-picker';
@@ -20,23 +19,6 @@ const ChangeImage = () => {
     getData();
   }, []);
 
-    // try {
-    //   const token = await AsyncStorage.getItem('userToken');
-    //   setToken(token);
-    //   const res = await Axios.get(API_USER, {
-    //     headers: {
-    //       Authorization: token,
-    //     },
-    //   });
-    //   if (res !== null) {
-    //     const data = res.data.data.userData;
-    //     setAvatar(data.profile.avatar);
-    //   } else {
-    //     console.log('error');
-    //   }
-    // } catch (err) {
-    //   console.log(err, 'error');
-    // }
 
   const ChooseFile = () => {
     const options = {
@@ -77,7 +59,7 @@ const ChangeImage = () => {
       }).then(res => {
         const status = res.data.status;
         if (status == 'success') {
-          // alert('Update Image Success');
+          alert('Update Image Success');
           navigation.navigate('Profile');
         } else {
         }
