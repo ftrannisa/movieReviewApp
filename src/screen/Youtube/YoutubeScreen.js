@@ -1,13 +1,43 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import YouTube from 'react-native-youtube';
 import {header} from '../../assets';
+import Axios from 'axios';
 
-const YTubeApi = 'AIzaSyDeQojP5P2dQkVzDwI_22E7GgMyjJXkCSs'
 
+const YouTubeScreen = ({route}) => {
+    const [video, setVideo] = useState('')
 
-const YouTubeScreen = () => {
+    useEffect(() => {
+        getData()
+    }, [])
+
+    const getData = async () => {
+        const id = route.params.id
+        try {
+            const res = await Axios.get(
+                `https://api.themoviedb.org/3/movie/${id}/videos?api_key=90bb3764c9321cec09a9d576cf929c61&language=en-US`
+            )
+            console.log('res', res)
+
+            if (res !== null) {
+                const dataVideo = res.data.results[0]
+                setVideo(dataVideo.key)
+            } else if (dataVideo == null) {
+                alert("Movie has no trailer")
+            } 
+            else {
+                console.log('error')
+            }
+        } catch (error) {
+            console.log(error, 'error')
+        }
+    }
+
+    const YTubeApi = 'AIzaSyDeQojP5P2dQkVzDwI_22E7GgMyjJXkCSs'
+    const url = {video}
+
     return (
         <View style={{backgroundColor: 'black', flex: 1, padding: 10}}>
             <Image source={header} style={styles.header} />
@@ -15,7 +45,7 @@ const YouTubeScreen = () => {
                 <Text style={styles.textSection}>Trailer</Text>
                 <YouTube
                 apiKey={YTubeApi}
-                videoId="1d0Zf9sXlHk" // The YouTube video ID
+                videoId={video} // The YouTube video ID
                 play // control playback of video with true/false
                 //fullscreen // control whether the video should play in fullscreen or inline
                 loop // control whether the video should loop when ended
