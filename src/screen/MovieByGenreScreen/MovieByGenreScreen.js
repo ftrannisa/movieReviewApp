@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Share} from 'react-native';
-import {Button, Card, Image} from 'react-native-elements';
+import {Button, Card, Image, Icon} from 'react-native-elements';
 import {
   ScrollView,
   FlatList,
@@ -8,7 +8,6 @@ import {
 } from 'react-native-gesture-handler';
 import Axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../utils/color';
 
 
@@ -56,7 +55,10 @@ const MovieByGenre = (props) => {
         </TouchableWithoutFeedback>
         <Button
           icon={
-            <Ionicons name="caret-forward-circle-outline" size={40} color={colors.default} />
+            <Icon type="material-community"
+                  name="play-circle-outline"
+                  size={40}
+                  color={colors.default} />
           }
           type="clear"
           containerStyle={styles.imageButton}
@@ -73,7 +75,12 @@ const MovieByGenre = (props) => {
       <View style={styles.containerButton}>
         <Button
           icon={
-            <Ionicons name="chatbubbles-outline" color="#040303" style={{marginRight: 10}}/>
+            <Icon
+            name="comment-text-outline"
+            type="material-community"
+            color="#040303"
+            style={{marginRight: 10, alignItems: 'baseline'}}
+        />
           }
           title={item.vote_count}
           type="clear"
@@ -86,7 +93,11 @@ const MovieByGenre = (props) => {
         />
         <Button
           icon={
-            <Ionicons name="share-social-outline"color="#040303" size={20}  />
+            <Icon
+            name="share-variant"
+            type="material-community"
+            color="#040303"
+        />
         }  
         type="clear"
         onPress={() =>

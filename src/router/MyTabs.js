@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MyReviewScreen, HomeScreen, ProfileScreen} from '../screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Icon } from 'react-native-elements'
 import {colors} from '../utils/color';
 
 const Tab = createBottomTabNavigator();
@@ -33,9 +34,11 @@ export default TabScreen = () => {
         name="My Review"
         component={MyReviewScreen}
         options={{
-          // tabBarLabel: 'My Review',
           tabBarIcon: ({size, color}) => (
-            <Ionicons name="chatbubble" size={25} color={color} />
+            <Icon type="material-community"
+                  name="forum"
+                  size={25}
+                  color={color} />
           ),
         }}
       />
@@ -43,9 +46,11 @@ export default TabScreen = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          // tabBarLabel: 'Home',
           tabBarIcon: ({size, color}) => (
-            <Ionicons name="home" size={25} color={color} />
+            <Icon type="material-community"
+                  name="home"
+                  size={25}
+                  color={color} />
           ),
         }}
       />
@@ -53,9 +58,11 @@ export default TabScreen = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          // tabBarLabel: 'Profile',
           tabBarIcon: ({size, color}) => (
-            <Ionicons name="person" size={25} color={color} />
+            <Icon type="material-community"
+                  name="account"
+                  size={25}
+                  color={color} />
           ),
         }}
       />

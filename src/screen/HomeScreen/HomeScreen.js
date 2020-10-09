@@ -7,9 +7,8 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-import {SearchBar, Button} from 'react-native-elements';
+import {SearchBar, Button, Icon} from 'react-native-elements';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {header} from '../../assets';
 import Axios from 'axios';
 import {colors} from '../../utils/color';
@@ -17,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import Genre from '../../components/materials/GenreHome';
 import TopRatedMovies from '../../components/materials/TopRatedMovies';
 import PopularMovies from '../../components/materials/PopularMovies';
+
 
 const {height, width} = Dimensions.get('window');
 console.disableYellowBox = true;
@@ -57,7 +57,10 @@ const Home = () => {
           <TouchableOpacity
             onPress={() => handleGoTo('AllGenreScreen')}
             style={styles.sectionAction}>
-            <Ionicons name="arrow-forward-outline" size={25} color="#fff" />
+            <Icon type="material-community"
+                                name="arrow-right"
+                                size={25}
+                                color="#fff" />
           </TouchableOpacity>
         </View>
         <View style={styles.genreListContainer}>

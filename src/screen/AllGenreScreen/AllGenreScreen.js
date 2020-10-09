@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import AllGenre from '../../components/materials/AllGenre';
 import {header} from '../../assets';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Icon } from 'react-native-elements'
 
 export default function AllGenreScreen({navigation}) {
   return (
@@ -11,7 +11,10 @@ export default function AllGenreScreen({navigation}) {
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.sectionAction}>
-          <Ionicons name="arrow-back-outline" size={25} color="#fff" />
+          <Icon type="material-community"
+                name="arrow-left"
+                size={25}
+                color="#fff" />
         </TouchableOpacity>
         <Image source={header} style={styles.header} />
       </View>

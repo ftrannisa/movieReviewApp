@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
         marginBottom: 5,
         fontFamily: 'Roboto',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: -20,
       },
 
 })

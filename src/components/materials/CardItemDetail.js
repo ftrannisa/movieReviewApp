@@ -9,9 +9,7 @@ import {
 import Axios from 'axios'
 import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import {colors} from '../../utils/color'
-import YouTube from 'react-native-youtube'
 
 const CardItemDetail = (props) => {
     console.log('isi props details', props)
@@ -90,11 +88,12 @@ const CardItemDetail = (props) => {
                         </TouchableWithoutFeedback>
                         <Button
                             icon={
-                                <Ionicons
-                                    name="caret-forward-circle-outline"
-                                    size={40}
-                                    color={colors.default}
-                                />
+                                <Icon
+                                type="material-community"
+                                name="play-circle-outline"
+                                size={40}
+                                color={colors.default}
+                              />
                             }
                             type="clear"
                             containerStyle={styles.imageButton}
