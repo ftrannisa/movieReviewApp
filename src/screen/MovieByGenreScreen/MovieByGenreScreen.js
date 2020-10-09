@@ -5,6 +5,7 @@ import {
   ScrollView,
   FlatList,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native-gesture-handler';
 import Axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
@@ -73,24 +74,24 @@ const MovieByGenre = (props) => {
       </View>
       <Text style={styles.commentText}>{item.overview}</Text>
       <View style={styles.containerButton}>
-        <Button
-          icon={
+        
+        <TouchableOpacity 
+          style={styles.allReviewContainer}
+         onPress={() =>
+          navigation.navigate('All Review', {
+              id: data.id,
+          })
+        }>
             <Icon
             name="comment-text-outline"
             type="material-community"
             color="#040303"
             style={{marginRight: 10, alignItems: 'baseline'}}
-        />
-          }
-          title={item.vote_count}
-          type="clear"
-          titleStyle={styles.titleButton}
-          onPress={() =>
-            navigation.navigate('Details Screen', {
-              id: item.id,
-            })}
-            // harusnya ini All Review guyssss
-        />
+            />
+           <Text style={styles.titleButton}>
+            {item.vote_count}
+           </Text>
+        </TouchableOpacity>
         <Button
           icon={
             <Icon
@@ -170,6 +171,11 @@ const styles = StyleSheet.create({
     letterSpacing: -0.2,
     color: '#040303',
   },
+  allReviewContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+},
   imageContainer: {
     justifyContent: 'center',
     alignSelf: 'center',

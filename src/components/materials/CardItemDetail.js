@@ -194,6 +194,7 @@ const CardItemDetail = (props) => {
                     </View>
                 </Card>
             </View>
+            
         </ScrollView>
     )
 }
