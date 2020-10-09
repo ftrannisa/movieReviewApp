@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity, Share} from 'react-native';
+import {View, StyleSheet, Text, Share} from 'react-native';
 import {Button, Card, Image, Icon} from 'react-native-elements';
 import {
   ScrollView,
