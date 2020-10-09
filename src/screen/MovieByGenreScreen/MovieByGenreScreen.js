@@ -78,8 +78,8 @@ const MovieByGenre = (props) => {
         <TouchableOpacity 
           style={styles.allReviewContainer}
          onPress={() =>
-          navigation.navigate('All Review', {
-              id: data.id,
+          navigation.navigate('Details Screen', {
+              id: item.id,
           })
         }>
             <Icon
