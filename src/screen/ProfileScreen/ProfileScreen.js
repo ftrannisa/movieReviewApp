@@ -62,20 +62,27 @@ const Profile = () => {
     }
   };
 
-  // BELUM BISA NGEPUTT !!!!!!!!!!!!!!!!!
+ 
   const handleChangeUsername = async () => {
     const token = await AsyncStorage.getItem('userToken');
     setUserToken(token);
     console.log("token username", token)
-    let dataForm = new FormData();
-    dataForm.append('nama', username);
+    // let dataForm = new FormData();
+    // dataForm.append('nama', username);
     try {
-      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/id`, dataForm, {
+      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/edit`, {
         headers: {
           access_token: token,
         },
       });
       console.log("res profile changed", res)
+      if (res !== null) {
+        const data = res.data.User_Data;
+        setUsername(data.nama);
+        // setAvatar(data.profileImage);
+      } else {
+        console.log('error');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -157,13 +164,13 @@ const Profile = () => {
           size={25}
           color="#fff"
           containerStyle={styles.icon}
-          onPress={() => navigation.navigate('Edit Image')}
+          // onPress={() => navigation.navigate('Edit Image')}
         />
+      </View>
+      <View style={styles.profileData}>
         <Text style={styles.title}>
           {username !== null ? username : 'Name'}
         </Text>
-      </View>
-      <View style={styles.profileData}>
         {editBar}
         <Text style={styles.profileDataText}>
           {state.email !== null ? state.email : 'Email'}

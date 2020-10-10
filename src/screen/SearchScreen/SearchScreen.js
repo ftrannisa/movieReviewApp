@@ -32,7 +32,7 @@ console.log("route adalah", route)
       if (res !== null) {
         const dataMovie = res.data.results;
         setData(dataMovie);
-        console.log("search bar masuk ga", dataMovie)
+        // console.log("search bar masuk ga", dataMovie)
       } else {
         console.log('error');
       }
@@ -110,13 +110,11 @@ console.log("route adalah", route)
   return (
     <View style={styles.container}>
       <Text style={styles.titleSearch}>Results for {route.params.val}</Text>
-      <ScrollView>
         <FlatList
           data={data}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
-      </ScrollView>
     </View>
   );
 };

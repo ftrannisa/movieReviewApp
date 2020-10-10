@@ -118,13 +118,11 @@ const MovieByGenre = (props) => {
       <View style={{paddingBottom: 20}}>
         <Text style={styles.genreListTitle}> Top {props.route.params.genreName} Movies</Text>
       </View>
-      <ScrollView>
         <FlatList
           data={data}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
-      </ScrollView>
     </View>
   );
 };
