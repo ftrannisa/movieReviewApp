@@ -27,7 +27,7 @@ export default function TopRatedMovies({navigation}) {
       if (res !== null) {
         const dataTopRated = res.data.results;
         setTopRated(dataTopRated);
-        console.log('masuk ga sih', dataTopRated);
+        // console.log('masuk ga sih', dataTopRated);
       } else {
         console.log('error');
       }
@@ -43,8 +43,8 @@ export default function TopRatedMovies({navigation}) {
   const link = 'https://image.tmdb.org/t/p/w500';
 
   const RenderItem = ({item, navigation}) => {
-    console.log('top rated guys', topRated);
-    console.log('item', item);
+    // console.log('top rated guys', topRated);
+    // console.log('item', item);
     return (
       <View style={styles.cardView}>
         <TouchableOpacity

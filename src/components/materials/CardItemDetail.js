@@ -118,7 +118,7 @@ const CardItemDetail = (props) => {
         }
     }
 
-    console.log('data carditemdetail', data)
+    // console.log('data carditemdetail', data)
     return (
         <ScrollView>
             <Modal

@@ -22,6 +22,7 @@ const DEVICE = Dimensions.get('window');
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   
 
   const onChangeEmail = (val) => {
@@ -42,8 +43,8 @@ const LoginScreen = ({navigation}) => {
         },
       );
 
-      AsyncStorage.setItem('userToken', res.access_token)
-      onChange("userToken", res.access_token)
+      AsyncStorage.setItem('userToken', res.data.access_token)
+      onChange("userToken", res.data.access_token)
       console.log("res login", res)
       navigation.navigate('Tab')
 

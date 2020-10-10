@@ -13,7 +13,7 @@ import {colors} from '../../utils/color';
 import Axios from 'axios';
 
 const Register = ({navigation}) => {
-  const [name, setName] = useState('');
+  const [nama, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -30,7 +30,7 @@ const Register = ({navigation}) => {
   };
 
   const handleRegister = async () => {
-    console.log(name);
+    console.log(nama);
     console.log(email);
     console.log(password);
 
@@ -38,13 +38,13 @@ const Register = ({navigation}) => {
       const submit = await Axios.post(
         'http://damp-dawn-67180.herokuapp.com/register',
         {
-          name: name,
+          nama: nama,
           email: email,
           password: password,
         },
       );
       console.log("res register", submit);
-      navigation.navigate('Tab');
+      navigation.navigate('Login');
     } catch (error) {
       console.log(error);
     }

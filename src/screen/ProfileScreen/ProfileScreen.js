@@ -5,15 +5,15 @@ import {Image, Button, Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Axios from 'axios';
-import {API_USER} from '../API';
 import { colors } from '../../utils/color';
 import {header} from '../../assets';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const Profile = () => {
   const navigation = useNavigation();
   const [state, setState] = useState({
-    name: '',
+    nama: '',
     email: '',
   });
   const [avatar, setAvatar] = useState('');
@@ -23,8 +23,7 @@ const Profile = () => {
 
   useEffect(() => {
     getData();
-    avatar;
-  }, [avatar]);
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -35,22 +34,26 @@ const Profile = () => {
     }
   };
 
+
+
   const getData = async () => {
     try {
       const token = await AsyncStorage.getItem('userToken');
       setUserToken(token);
-      const res = await Axios.get(API_USER, {
+      console.log("token profile", token)
+      const res = await Axios.get(`http://damp-dawn-67180.herokuapp.com/user/id`, {
         headers: {
-          Authorization: token,
+          access_token: token,
         },
       });
+      console.log('res profile', res)
       if (res !== null) {
-        const data = res.data.data.userData;
+        const data = res.data.User_Data;
         setState({
           email: data.email,
         });
-        setUsername(data.profile.name);
-        setAvatar(data.profile.avatar);
+        setUsername(data.nama);
+        setAvatar(data.profileImage);
       } else {
         console.log('error');
       }
@@ -59,26 +62,20 @@ const Profile = () => {
     }
   };
 
+  // BELUM BISA NGEPUTT !!!!!!!!!!!!!!!!!
   const handleChangeUsername = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    setUserToken(token);
+    console.log("token username", token)
     let dataForm = new FormData();
-    dataForm.append('name', username);
+    dataForm.append('nama', username);
     try {
-      const res = await Axios.put(API_USER, dataForm, {
+      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/id`, dataForm, {
         headers: {
-          Authorization: userToken,
-          'Content-Type': 'multipart/form-data',
+          access_token: token,
         },
       });
-
-      if (res !== null) {
-        const status = res.data.status;
-        if (status == 'success') {
-          alert('Update profile success');
-          setEdit(false);
-        } else {
-          alert('Invalid input');
-        }
-      }
+      console.log("res profile changed", res)
     } catch (error) {
       console.log(error);
     }
@@ -151,6 +148,7 @@ const Profile = () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Image source={header} style={styles.header} />
+      <ScrollView>
       <View style={styles.profileImageContainer}>
         <Image source={Avatar} style={styles.profileImage} />
         <Icon
@@ -179,6 +177,7 @@ const Profile = () => {
           onPress={handleLogout}
         />
       </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -206,7 +205,6 @@ const styles = StyleSheet.create({
   },
   profileImageContainer: {
     alignSelf: 'center',
-    marginVertical: 15,
     marginLeft: 10
   },
   profileData: {
@@ -216,7 +214,6 @@ const styles = StyleSheet.create({
     color: '#F6F7F7',
     fontFamily: 'Roboto',
     fontSize: 20,
-    textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
     borderBottomWidth: 1,
