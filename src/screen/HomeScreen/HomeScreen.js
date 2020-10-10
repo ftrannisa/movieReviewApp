@@ -42,8 +42,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <Image source={header} style={styles.header} />
-      <ScrollView>
-        <SearchBar
+      <SearchBar
           placeholder="Search movies"
           inputContainerStyle={styles.inputContainer}
           containerStyle={styles.searchBarContainer}
@@ -52,6 +51,7 @@ const Home = () => {
           onSubmitEditing={() => handleSearch(searchQuery)}
           navigation={navigation}
         />
+      <ScrollView>
         <View style={styles.section}>
           <Text style={styles.textSection}>Genre</Text>
           <TouchableOpacity
