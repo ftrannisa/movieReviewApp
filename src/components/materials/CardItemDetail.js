@@ -17,6 +17,7 @@ const CardItemDetail = (props) => {
     const [genre, setGenre] = useState('')
     const navigation = useNavigation()
     const [id, setID] = useState('')
+    const [isRateMode, setIsRateMode] = useState(false);
 
     useEffect(() => {
         getData()
@@ -142,10 +143,7 @@ const CardItemDetail = (props) => {
                                             color="#979797"
                                         />
                                     }
-                                    // onPress={() =>
-                                    //   navigation.navigate('All Review', {
-                                    //     id: data.id,
-                                    //   })}
+                                    // onPress={() => setIsRateMode(true)} 
                                     type="clear"
                                     buttonStyle={styles.buttonRating}
                                     containerStyle={

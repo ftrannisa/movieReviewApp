@@ -35,19 +35,18 @@ const Register = ({navigation}) => {
     console.log(password);
 
     try {
-      const res = await Axios.post(
-        'https://be-kickin.herokuapp.com/api/v1/user/register',
+      const submit = await Axios.post(
+        'http://damp-dawn-67180.herokuapp.com/register',
         {
           name: name,
           email: email,
           password: password,
         },
       );
-      console.log('tes');
+      console.log("res register", submit);
       navigation.navigate('Tab');
     } catch (error) {
       console.log(error);
-      alert('Login failed. Please check again your credentials.');
     }
   };
 

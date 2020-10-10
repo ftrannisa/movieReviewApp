@@ -14,13 +14,15 @@ import {Button, Input} from '../../components';
 import {logo} from '../../assets';
 import {colors} from '../../utils/color';
 import Axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
+import { onChange } from 'react-native-reanimated';
 
 const DEVICE = Dimensions.get('window');
 
 const LoginScreen = ({navigation}) => {
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
 
   const onChangeEmail = (val) => {
     setEmail(val);
@@ -33,14 +35,18 @@ const LoginScreen = ({navigation}) => {
   const handleLogin = async () => {
     try {
       const res = await Axios.post(
-        'https://be-kickin.herokuapp.com/api/v1/user/login',
+        'http://damp-dawn-67180.herokuapp.com/login',
         {
           email: email,
           password: password,
         },
       );
 
-      navigation.navigate('Tab');
+      AsyncStorage.setItem('userToken', res.access_token)
+      onChange("userToken", res.access_token)
+      console.log("res login", res)
+      navigation.navigate('Tab')
+
     } catch (error) {
       console.log(error);
       alert('Login failed. Please check again your credentials.');
@@ -82,8 +88,8 @@ const LoginScreen = ({navigation}) => {
         onChangeText={onChangePassword}
         placeholderTextColor="#B4B4B0"
       />
-      {/* <Button title="Login" onPress={() => handleLogin()} /> */}
-      <Button title="Login" onPress={() => handleGoTo('Tab')} />
+      <Button title="Login" onPress={() => handleLogin()} />
+      {/* <Button title="Login" onPress={() => handleGoTo('Tab')} /> */}
 
       <Text
         style={{

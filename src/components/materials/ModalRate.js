@@ -86,6 +86,12 @@ const styles = StyleSheet.create({
     maxHeight: 500,
     position: 'absolute',
   },
+  modalContainer: {
+    margin: 20,
+    flex: 1,
+    alignSelf: 'center',
+    justifyContent: 'center'
+  },
   title: {
     fontFamily: 'Roboto',
     fontWeight: 'bold',
@@ -94,12 +100,6 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     marginVertical: 10,
-  },
-  modalContainer: {
-    margin: 20,
-    flex: 1,
-    alignSelf: 'center',
-    justifyContent: 'center'
   },
   inputTitle: {
     backgroundColor: '#fff',
@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   button: {
-    borderRadius: 25,
+    borderRadius: 20,
     alignSelf: 'center',
     width: 150,
-    margin: 10,
+    margin: 8,
     backgroundColor: colors.default,
   },
   ratingContainer: {

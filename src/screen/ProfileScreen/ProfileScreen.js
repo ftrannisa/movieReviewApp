@@ -29,7 +29,7 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await AsyncStorage.removeItem('userToken');
-      navigation.navigate('Home');
+      navigation.navigate('Login');
     } catch (error) {
       console.log(error, 'error');
     }
