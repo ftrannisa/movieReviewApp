@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, StyleSheet, Share} from 'react-native'
+import {View, Text, StyleSheet, Share, TextInput, Dimensions} from 'react-native'
 import {Card, Button, Icon, Image} from 'react-native-elements'
 import {
     TouchableWithoutFeedback,
@@ -10,6 +10,8 @@ import Axios from 'axios'
 import moment from 'moment'
 import {useNavigation} from '@react-navigation/native'
 import {colors} from '../../utils/color'
+import Modal from 'react-native-modal';
+import StarRating from 'react-native-star-rating';
 
 const CardItemDetail = (props) => {
     console.log('isi props details', props)
@@ -17,7 +19,22 @@ const CardItemDetail = (props) => {
     const [genre, setGenre] = useState('')
     const navigation = useNavigation()
     const [id, setID] = useState('')
-    const [isRateMode, setIsRateMode] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [starRate, setStarRate] = useState(0);
+    const [title, setTitle] = useState('');
+    const [review, setReview] = useState('');
+    const deviceWidth = Dimensions.get('window').width;
+    const deviceHeight = Dimensions.get('window').height;
+    const onStarRatingPress = rating => {
+        setStarRate(rating);
+    };
+    const onTitleChange = val => {
+        setTitle(val);
+    };
+    const onReviewChange = val => {
+        setReview(val);
+    };
+
 
     useEffect(() => {
         getData()
@@ -69,10 +86,57 @@ const CardItemDetail = (props) => {
         }
     }
 
-    console.log('data', data)
+    console.log('data carditemdetail', data)
     return (
         <ScrollView>
-            <View>
+            <Modal
+                isVisible={modalVisible}
+                style={styles.modal}
+                deviceHeight={deviceHeight}
+                deviceWidth={deviceWidth}>
+            <View style={styles.modalContainer}>
+                <Text style={styles.titleModal}>How do you think about this movie?</Text>
+                    <StarRating
+                        disabled={false}
+                        emptyStar={'ios-star-outline'}
+                        fullStar={'ios-star'}
+                        iconSet={'Ionicons'}
+                        maxStars={10}
+                        rating={starRate}
+                        selectedStar={rating => onStarRatingPress(rating)}
+                        fullStarColor={'rgba(255, 194, 0, 0.98)'}
+                        containerStyle={styles.ratingContainerModal}
+                    />
+                    <Text style={styles.titleModal}>Your Rating: {starRate}</Text>
+                    <TextInput
+                        placeholder="Write a headline for your review here"
+                        placeholderTextColor="#979797"
+                        style={styles.inputTitleModal}
+                        maxLength={40}
+                        onChangeText={val => onTitleChange(val)}
+                    />
+                    <TextInput
+                        placeholder="Write your review here"
+                        placeholderTextColor="#979797"
+                        style={styles.inputReviewModal}
+                        maxLength={200}
+                        onChangeText={val => onReviewChange(val)}
+                        multiline={true}
+                    />
+                    <Button
+                        title="Submit"
+                        buttonStyle={styles.buttonModal}
+                    />
+                    <Button
+                        title="Cancel"
+                        buttonStyle={styles.buttonModal}
+                        onPress={() => {
+                            setModalVisible(false);
+                        }}
+                    />
+                </View>
+            </Modal>
+            <View >
                 <Card containerStyle={styles.cardContainer}>
                     <View style={styles.imageContainer}>
                         <TouchableWithoutFeedback>
@@ -143,7 +207,7 @@ const CardItemDetail = (props) => {
                                             color="#979797"
                                         />
                                     }
-                                    // onPress={() => setIsRateMode(true)} 
+                                    onPress={() => setModalVisible(true)} 
                                     type="clear"
                                     buttonStyle={styles.buttonRating}
                                     containerStyle={
@@ -318,4 +382,57 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 220,
     },
+    containerModal: {
+        flex: 1,
+      },
+      modal: {
+        backgroundColor: 'black',
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        maxHeight: 500,
+        position: 'absolute',
+      },
+      modalContainer: {
+        margin: 20,
+        flex: 1,
+        alignSelf: 'center',
+        justifyContent: 'center'
+      },
+      titleModal: {
+        fontFamily: 'Roboto',
+        fontWeight: 'bold',
+        fontSize: 16,
+        letterSpacing: -0.2,
+        color: 'white',
+        textAlign: 'center',
+        marginVertical: 10,
+      },
+      inputTitleModal: {
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 10,
+        marginVertical: 10,
+        textAlign: 'justify',
+      },
+      inputReviewModal: {
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 10,
+        marginVertical: 10,
+        maxHeight: 150,
+        height: 101,
+        textAlign: 'justify',
+        textAlignVertical: 'top',
+      },
+      buttonModal: {
+        borderRadius: 20,
+        alignSelf: 'center',
+        width: 150,
+        margin: 8,
+        backgroundColor: colors.default,
+      },
+      ratingContainerModal: {
+        alignSelf: 'center',
+      },
 })
