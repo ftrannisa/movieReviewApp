@@ -35,6 +35,38 @@ const CardItemDetail = (props) => {
         setReview(val);
     };
 
+    // const handleRatesubmit = async () => {
+    //     try {
+    //     //   const token = await AsyncStorage.getItem('userToken');
+    //       const res = await Axios.post(
+    //         `http://damp-dawn-67180.herokuapp.com/${id}`,
+    //         {
+    //           title: title,
+    //           description: review,
+    //           rating: starRate,
+    //         },
+    //         {
+    //           headers: {
+    //             Authorization: token,
+    //           },
+    //         },
+    //       );
+    //       if (res !== null) {
+    //         alert('Rate Success');
+    //         dispatch({type: SUCCESS});
+    //         dispatch({type: COMMENT});
+    //       } else {
+    //         dispatch({type: FAILED});
+    //       }
+    //     } catch (error) {
+    //       console.log(error, 'error');
+    //       dispatch({type: FAILED});
+    //     }
+    //     console.log(title);
+    //     console.log(review);
+    //     console.log(starRate);
+    //     console.log(id);
+    //   };    
 
     useEffect(() => {
         getData()
@@ -90,6 +122,8 @@ const CardItemDetail = (props) => {
     return (
         <ScrollView>
             <Modal
+                animationIn= 'fadeIn'
+                animationOut= 'fadeOut'
                 isVisible={modalVisible}
                 style={styles.modal}
                 deviceHeight={deviceHeight}
@@ -124,15 +158,15 @@ const CardItemDetail = (props) => {
                         multiline={true}
                     />
                     <Button
-                        title="Submit"
-                        buttonStyle={styles.buttonModal}
+                    title="Submit"
+                    buttonStyle={styles.buttonModal}
                     />
                     <Button
-                        title="Cancel"
-                        buttonStyle={styles.buttonModal}
-                        onPress={() => {
-                            setModalVisible(false);
-                        }}
+                    title="Cancel"
+                    buttonStyle={styles.buttonModal}
+                    onPress={() => {
+                        setModalVisible(!modalVisible);
+                      }}
                     />
                 </View>
             </Modal>

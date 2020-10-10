@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
   FlatList,
+  TouchableOpacity,
 } from 'react-native-gesture-handler';
 import { colors } from '../../utils/color';
 
@@ -72,24 +73,22 @@ console.log("route adalah", route)
       </View>
       <Text style={styles.commentText}>{item.overview}</Text>
       <View style={styles.containerButton}>
-        <Button
-          icon={
-            <Icon
+        <TouchableOpacity style={styles.allReviewContainer}
+          onPress={() =>
+            navigation.navigate('Details Screen', {
+                id: data.id,
+            })
+         }>
+          <Icon
               name="comment-text-outline"
               type="material-community"
               color="#040303"
               style={{marginRight: 10}}
             />
-          }
-          title={item.vote_count}
-          type="clear"
-          titleStyle={styles.titleButton}
-          onPress={() =>
-            navigation.navigate('Details Screen', {
-              id: item.id,
-            })}
-            // harusnya ini All Review guyssss
-        />
+            <Text style={styles.titleButton}>
+             {item.vote_count}
+            </Text>
+        </TouchableOpacity>
         <Button
           icon={
             <Icon
@@ -236,5 +235,10 @@ const styles = StyleSheet.create({
     color: '#F6F7F7',
     textAlign: 'center',
     margin: 20,
+  },
+  allReviewContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
   },
 });
