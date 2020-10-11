@@ -8,6 +8,8 @@ import Axios from 'axios';
 import { colors } from '../../utils/color';
 import {header} from '../../assets';
 import { ScrollView } from 'react-native-gesture-handler';
+import ImagePicker from 'react-native-image-picker';
+
 
 
 const Profile = () => {
@@ -25,6 +27,31 @@ const Profile = () => {
     getData();
   }, []);
 
+  const ChooseFile = () => {
+    const options = {
+      title: 'Select Image',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.showImagePicker(options, response => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        // setEdit(true);
+        // setAvatar({uri: `${response.uri}`});
+        // setFilePath(response);
+        const source = {uri: response.uri};
+        setAvatar(source);
+      }
+    });
+  };
+
   const handleLogout = async () => {
     try {
       await AsyncStorage.removeItem('userToken');
@@ -33,8 +60,6 @@ const Profile = () => {
       console.log(error, 'error');
     }
   };
-
-
 
   const getData = async () => {
     try {
@@ -48,7 +73,7 @@ const Profile = () => {
       });
       console.log('res profile', res)
       if (res !== null) {
-        const data = res.data.User_Data;
+        const data = res.data.users;
         setState({
           email: data.email,
         });
@@ -67,19 +92,19 @@ const Profile = () => {
     const token = await AsyncStorage.getItem('userToken');
     setUserToken(token);
     console.log("token username", token)
-    // let dataForm = new FormData();
-    // dataForm.append('nama', username);
+   
     try {
-      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/edit`, {
+      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/edit`, {nama: setUsername}, {
         headers: {
           access_token: token,
         },
       });
       console.log("res profile changed", res)
       if (res !== null) {
-        const data = res.data.User_Data;
-        setUsername(data.nama);
-        // setAvatar(data.profileImage);
+        const data = res.data.users;
+        setState({
+          nama: data.nama,
+        });
       } else {
         console.log('error');
       }
@@ -154,7 +179,7 @@ const Profile = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Image source={header} style={styles.header} />
+      <Image source={avatarImage} style={styles.header} />
       <ScrollView>
       <View style={styles.profileImageContainer}>
         <Image source={Avatar} style={styles.profileImage} />
@@ -164,7 +189,7 @@ const Profile = () => {
           size={25}
           color="#fff"
           containerStyle={styles.icon}
-          // onPress={() => navigation.navigate('Edit Image')}
+          onPress={ChooseFile}
         />
       </View>
       <View style={styles.profileData}>
