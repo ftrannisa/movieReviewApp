@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, StyleSheet, View, TextInput, KeyboardAvoidingView} from 'react-native';
-// import {Avatar} from '../../assets/';
+import {Avatar} from '../../assets/';
 import {Image, Button, Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -79,6 +79,7 @@ const Profile = () => {
         });
         setUsername(data.nama);
         setAvatar(data.profileImage);
+        console.log(avatar)
       } else {
         console.log('error');
       }
@@ -87,24 +88,43 @@ const Profile = () => {
     }
   };
 
- 
-  const handleChangeUsername = async () => {
-    const token = await AsyncStorage.getItem('userToken');
-    setUserToken(token);
-    console.log("token username", token)
-    let dataForm = new FormData();
-    dataForm.append('nama', username);
+  const handleSubmit= async (e) => {
+    e.preventDefault();
     try {
-      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/edit`, dataForm, {
-        headers: {
-          access_token: token,
-        },
-      });
-      console.log("res profile changed", res)
+        const token = await AsyncStorage.getItem('userToken');
+        setUserToken(token);
+        console.log("token profile", token)
+        console.log("username", username)
+        console.log("avatar", avatar)
+        const dataForm = new FormData();
+        dataForm.append('nama', username);
+        dataForm.append('profileImage', avatar);
+    
+        // const res = await Axios.put("https://damp-dawn-67180.herokuapp.com/user/edit", dataForm, {
+        //   headers: {
+        //     access_token : token,
+        //     'content-type': 'application/x-www-form-urlencoded;charset=utf-8'    
+        //   },
+        // });
+        const res = await Axios({
+          method: 'put',
+          url: "https://damp-dawn-67180.herokuapp.com/user/edit",
+          data: dataForm,
+          headers: {
+                  access_token : token
+          },
+        });
+        console.log("res edit", res)
+        const data = res.data.users;
+        setUsername(data.nama);
+        setAvatar(data.profileImage);
+        console.log("data changed", data)
+        change();
+        props.history.push('/user');
     } catch (error) {
-      console.log(error);
-    }
-  };
+        console.log("error", error);
+}    
+}
 
   const onChangeUsername = val => {
     setUsername(val);
@@ -114,12 +134,13 @@ const Profile = () => {
     setEdit(!edit);
   };
 
-  let avatarImage;
-  if (avatar !== null) {
-    avatarImage = {uri: avatar};
-  } else {
-    avatarImage = Avatar;
-  }
+  // let avatarImage;
+  // if (avatar !== null) {
+  //   avatarImage = {uri: avatar};
+  // } else {
+  //   avatarImage = Avatar;
+  // }
+
   let editBar;
   if (edit == true) {
     editBar = (
@@ -139,7 +160,7 @@ const Profile = () => {
             size={25}
             containerStyle={[styles.usernameIcon, {marginRight: 10}]}
             color="#fff"
-            onPress={handleChangeUsername}
+            onPress={handleSubmit}
           />
           <Icon
             name="close-circle"
@@ -226,7 +247,8 @@ const styles = StyleSheet.create({
     height: 100,
     maxHeight: 250,
     maxWidth: 250,
-    borderRadius: 100,
+    borderRadius: 50,
+    zIndex: 100,
   },
   profileImageContainer: {
     alignSelf: 'center',
