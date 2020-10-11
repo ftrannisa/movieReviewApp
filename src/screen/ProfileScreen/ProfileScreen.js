@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, StyleSheet, View, TextInput, KeyboardAvoidingView} from 'react-native';
-import {Avatar} from '../../assets/';
+// import {Avatar} from '../../assets/';
 import {Image, Button, Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -9,7 +9,6 @@ import { colors } from '../../utils/color';
 import {header} from '../../assets';
 import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
-
 
 
 const Profile = () => {
@@ -28,29 +27,30 @@ const Profile = () => {
   }, []);
 
   const ChooseFile = () => {
-    const options = {
-      title: 'Select Image',
+    let options = {
+      title: 'Select Avatar', 
+      cameraType: 'front',
+      mediaType: 'photo' ,
       storageOptions: {
-        skipBackup: true,
-        path: 'images',
+      skipBackup: true,
+      path: 'images',
       },
     };
-    ImagePicker.showImagePicker(options, response => {
+    ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
-
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
       } else {
-        // setEdit(true);
-        // setAvatar({uri: `${response.uri}`});
-        // setFilePath(response);
-        const source = {uri: response.uri};
-        setAvatar(source);
-      }
-    });
-  };
+        setAvatar(response.uri) }
+      })
+      console.log(avatar)
+    };
+  
 
   const handleLogout = async () => {
     try {
@@ -92,22 +92,15 @@ const Profile = () => {
     const token = await AsyncStorage.getItem('userToken');
     setUserToken(token);
     console.log("token username", token)
-   
+    let dataForm = new FormData();
+    dataForm.append('nama', username);
     try {
-      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/edit`, {nama: setUsername}, {
+      const res = await Axios.put(`http://damp-dawn-67180.herokuapp.com/user/edit`, dataForm, {
         headers: {
           access_token: token,
         },
       });
       console.log("res profile changed", res)
-      if (res !== null) {
-        const data = res.data.users;
-        setState({
-          nama: data.nama,
-        });
-      } else {
-        console.log('error');
-      }
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +126,7 @@ const Profile = () => {
       <View style={styles.username} behavior="height">
         <TextInput
           style={styles.inputBox}
-          placeholder="Username"
+          placeholder="Name"
           placeholderTextColor="#B4B4B0"
           selectionColor="#B4B4B0"
           defaultValue={username}
@@ -179,10 +172,10 @@ const Profile = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Image source={avatarImage} style={styles.header} />
+      <Image source={header} style={styles.header} />
       <ScrollView>
       <View style={styles.profileImageContainer}>
-        <Image source={Avatar} style={styles.profileImage} />
+        <Image source={avatar ? { uri: avatar } : require('../../assets/1.png')}  style={styles.profileImage} />
         <Icon
           type="material-community"
           name="account-edit"
